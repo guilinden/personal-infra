@@ -4,7 +4,7 @@ kind: ClusterConfig
 metadata:
   name: devops-cluster
   region: us-west-2
-  version: "1.27"
+  version: "1.26"
 
 vpc:
   clusterEndpoints:
@@ -15,7 +15,7 @@ vpc:
       us-west-2a: { id: subnet-098813ceb1004d200 }
       us-west-2b: { id: subnet-082c399df9bcd3a1b }
       us-west-2c: { id: subnet-0a9dae44f3e8c1ab7 }
-  securityGroup: sg-0d669dbe56116557a
+  securityGroup: sg-0aac93b354214f8f6
 
 managedNodeGroups:
   - name: devops-us-west2-2a
