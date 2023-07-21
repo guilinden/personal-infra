@@ -1,0 +1,49 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: devops-cluster
+  region: us-west-2
+  version: "1.27"
+
+vpc:
+  clusterEndpoints:
+    privateAccess: false
+    publicAccess: true
+  subnets:
+    public:
+      us-west-2a: { id: subnet-098813ceb1004d200 }
+      us-west-2b: { id: subnet-082c399df9bcd3a1b }
+      us-west-2c: { id: subnet-0a9dae44f3e8c1ab7 }
+  securityGroup: sg-0d669dbe56116557a
+
+managedNodeGroups:
+  - name: devops-us-west2-2a
+    minSize: 1
+    maxSize: 5
+    desiredCapacity: 1
+    instanceType: t2.micro
+    availabilityZones: ["us-west-2a"]
+  - name: devops-us-west2-2b
+    minSize: 1
+    maxSize: 5
+    desiredCapacity: 1
+    instanceType: t2.micro
+    availabilityZones: ["us-west-2b"]
+  - name: devops-us-west2-2c
+    minSize: 1
+    maxSize: 5
+    desiredCapacity: 1
+    instanceType: t2.micro
+    availabilityZones: ["us-west-2c"]
+
+gitops:
+  flux:
+    gitProvider: github
+    flags:
+      owner: guilinden
+      repository: personal-infra
+      branch: main
+      path: "flux/clusters/devops"
+      components-extra: "image-reflector-controller,image-automation-controller"
+      read-write-key: "true"
