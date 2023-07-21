@@ -6,6 +6,9 @@ metadata:
   region: us-west-2
   version: "1.26"
 
+iam:
+  withOIDC: true
+
 vpc:
   clusterEndpoints:
     privateAccess: false
@@ -22,19 +25,19 @@ managedNodeGroups:
     minSize: 1
     maxSize: 5
     desiredCapacity: 1
-    instanceType: t2.micro
+    instanceType: t2.medium
     availabilityZones: ["us-west-2a"]
   - name: devops-us-west2-2b
     minSize: 1
     maxSize: 5
     desiredCapacity: 1
-    instanceType: t2.micro
+    instanceType: t2.medium
     availabilityZones: ["us-west-2b"]
   - name: devops-us-west2-2c
     minSize: 1
     maxSize: 5
     desiredCapacity: 1
-    instanceType: t2.micro
+    instanceType: t2.medium
     availabilityZones: ["us-west-2c"]
 
 gitops:
