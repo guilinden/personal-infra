@@ -31,6 +31,7 @@ resource "aws_subnet" "public" {
   count      = length(data.aws_availability_zones.available_zones.names)
   vpc_id     = aws_vpc.devops.id
   cidr_block = cidrsubnet("172.25.128.0/17", 7, count.index)
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
 
   tags = {
     Public = "true"
@@ -41,6 +42,7 @@ resource "aws_subnet" "private" {
   count      = length(data.aws_availability_zones.available_zones.names)
   vpc_id     = aws_vpc.devops.id
   cidr_block = cidrsubnet(aws_vpc.devops.cidr_block, 6, count.index)
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
 }
 
 resource "aws_route_table_association" "public" {
