@@ -1,7 +1,7 @@
 resource "aws_security_group" "allow_cluster_access" {
   name        = "allowClusterAccess"
   description = "Allow access to the kubernetes cluster from the internet"
-
+  vpc_id      = aws_vpc.devops.id
   ingress {
     description = "Allow traffic from Guilherme home ip"
     from_port   = 6443
